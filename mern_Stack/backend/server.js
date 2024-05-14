@@ -1,12 +1,16 @@
+//install dotenv to use enviroment variablesles
 const port = process.env.PORT || 8000;
-const pp = process.env.PP || 8000;
+
+const workoutRoutes = require("./routes/workouts");
+
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
+//routes
+app.use("/api/workouts", workoutRoutes);
+
 //server instatance
-app.listen(port, (req, res) => {
-  console.log(port + "hello world" + pp);
+app.listen(port, () => {
+  console.log("*********server*************");
+  console.log("running server instance");
 });
