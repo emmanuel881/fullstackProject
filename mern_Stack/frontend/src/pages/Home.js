@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 //components
 import WorkoutDetails from "../components/workoutDetails";
 import WorkoutForm from "../components/workoutsForm";
 const Home = () => {
   //lets create a useState to watch over changes
-  const [workouts, setWorkouts] = useState(null);
+  //const [workouts, setWorkouts] = useState(null);
+  const { workouts, dispatch } = useWorkoutsContext();
 
   //let us import data from our backend
   useEffect(() => {
@@ -16,7 +19,8 @@ const Home = () => {
 
       //check if the fetch went well
       if (response.ok) {
-        setWorkouts(json);
+        //setWorkouts(json);
+        dispatch({ type: "SET_WORKOUTS", payload: json });
       }
     };
     fetchWorkouts();
